@@ -20,8 +20,12 @@ export default function PostsColumn() {
         });
     }, []);
 
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error: {error}</p>;
+    if (loading) return (
+        <span className="h-full flex flex-column justify-content-center align-items-center">
+            <i className="pi pi-spin pi-spinner text-4xl"></i>
+        </span>
+    );
+    if (error) return <p className="text-red-500">Error: {error}</p>;
 
     return (
         <>

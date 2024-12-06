@@ -9,15 +9,16 @@ import PostsColumn from '@common/PostsColumn';
 
 export default function Home() {
 
-    
-
-
-    
-
     return (
         <div id="page-home" className="grid flex-grow-1 ">
-            <div id="post-column" className='col-6 mx-auto border-x-1 border-y-none border-solid border-gray-500 my-2' >
+            <div className='col-3'>
+
+            </div>
+            <div id="post-column" className='col-6 border-x-1 border-y-none border-solid border-gray-500 my-2 ' >
                 <PostsColumn />
+            </div>
+            <div className='col-3'>
+
             </div>
         </div>
     );
