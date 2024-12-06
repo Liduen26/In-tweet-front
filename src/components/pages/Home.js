@@ -1,6 +1,7 @@
 import { InputText } from 'primereact/inputtext';
 import '@styles/style.scss';
 import 'primeflex/primeflex.css';
+import 'primeicons/primeicons.css';
 import Post from '@generics/Post';
 
 export default function Home() {
