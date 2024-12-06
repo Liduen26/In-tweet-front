@@ -23,7 +23,7 @@ export default function Post({post}) {
             <div id="post-content" className="p-1">
                 {post.body}
             </div>
-            <div id="action-bar" className="flex justify-content-between select-none pt-2">
+            <div id="action-bar" className="flex justify-content-between select-none pt-2 text-600">
                 <div>
                     <label className="flex gap-2 hover:text-red-500 align-items-center transition-colors transition-duration-100 cursor-pointer">
                         <i className="pi pi-heart text-sm"></i>
