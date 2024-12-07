@@ -2,13 +2,17 @@ import Post from "@generics/Post";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export default function PostsColumn() {
+export default function PostsColumn({isAdminMode}) {
 
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
+        getPostList();
+    }, []);
+    
+    const getPostList = () => {
         axios.get(
             "http://localhost:8080/post"
         ).then((response) => {
@@ -18,7 +22,7 @@ export default function PostsColumn() {
             setError(err.message);
             setLoading(false);
         });
-    }, []);
+    }
 
     if (loading) return (
         <span className="h-full flex flex-column justify-content-center align-items-center">
@@ -30,7 +34,7 @@ export default function PostsColumn() {
     return (
         <>
             { posts.map((post, index) => (
-                <Post key={index} post={post}/>
+                <Post key={index} post={post} isAdminMode={isAdminMode} refreshPosts={getPostList}/>
             )) }
         </>
     );
