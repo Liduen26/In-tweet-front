@@ -10,8 +10,6 @@ export default function Home() {
     const [isAdminMode, setIsAdminMode] = useState(false);
     const [isBanned, setIsBanned] = useState(true);
 
-    console.log(isAdminMode);
-
     return (
         <div id="page-home" className="grid flex-grow-1 ">
             <div className='col-3 mt-3'>

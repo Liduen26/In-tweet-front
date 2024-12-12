@@ -15,9 +15,9 @@ export default function UserInfos({isAdminMode, setIsAdminMode, isBanned}) {
         ).then((response) => {
             setUser(response.data);
             setLoading(false);
-            isBanned(response.data.banned)
+            isBanned(response.data.banned);
         }).catch((err) => {
-            setError(err.message);
+            setError(err.response.data.message);
             setLoading(false);
         });
     }, []);
