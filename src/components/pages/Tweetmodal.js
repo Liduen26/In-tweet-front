@@ -25,7 +25,7 @@ export default function TweetModal({ visible, onClose }) {
                     ></textarea>
                 </div>
                 <div className="modal-footer flex justify-content-end mt-3">
-                    <Button label="Tweeter" className="p-button-success" />
+                    <Button label="Tweeter" className="p-button-success" onClick={onClose} />
                 </div>
             </div>
         </div>
