@@ -3,6 +3,15 @@ import { useState } from 'react';
 import '@styles/style.scss';
 
 export default function TweetModal({ visible, onClose }) {
+    const [tweetContent, setTweetContent] = useState('');
+    const maxCharacters = 160;
+
+    const handleInputChange = (e) => {
+        if (e.target.value.length <= maxCharacters) {
+            setTweetContent(e.target.value);
+        }
+    };
+
     if (!visible) return null;
 
     return (
@@ -22,10 +31,20 @@ export default function TweetModal({ visible, onClose }) {
                         rows="5"
                         className="w-full border-round p-2"
                         placeholder="Quoi de neuf ?"
+                        value={tweetContent}
+                        onChange={handleInputChange}
                     ></textarea>
                 </div>
-                <div className="modal-footer flex justify-content-end mt-3">
-                    <Button label="Tweeter" className="p-button-success" onClick={onClose} />
+                <div className="modal-footer flex justify-content-between align-items-center mt-3">
+                    <span className="text-sm text-gray-400">
+                        Caractères restants : {maxCharacters - tweetContent.length}
+                    </span>
+                    <Button 
+                        label="Tweeter" 
+                        className="p-button-success" 
+                        onClick={onClose}
+                        disabled={tweetContent.length === 0}
+                    />
                 </div>
             </div>
         </div>
