@@ -1,4 +1,5 @@
 import PostsColumn from '@common/PostsColumn';
+import TweetModal from './TweetModal';
 import UserInfos from '@common/UserInfos';
 import '@styles/style.scss';
 import 'primeflex/primeflex.css';
@@ -9,6 +10,7 @@ import { useState } from 'react';
 export default function Home() {
     const [isAdminMode, setIsAdminMode] = useState(false);
     const [isBanned, setIsBanned] = useState(true);
+    const [isModalVisible, setIsModalVisible] = useState(false);
 
     return (
         <div id="page-home" className="grid flex-grow-1 ">
@@ -22,11 +24,17 @@ export default function Home() {
                 <UserInfos isAdminMode={isAdminMode} setIsAdminMode={setIsAdminMode} isBanned={setIsBanned} />
                 <span>
                     {
-                        !isBanned && 
-                        <Button icon="pi pi-pen-to-square" rounded aria-label="Filter" />
-                    }
+                        !isBanned && (
+                            <Button
+                                icon="pi pi-pencil"
+                                rounded
+                                aria-label="Tweet"
+                                onClick={() => setIsModalVisible(true)}
+                            />
+                    )}
                 </span>
             </div>
+            <TweetModal visible={isModalVisible} onClose={() => setIsModalVisible(false)} />
         </div>
     );
 }
