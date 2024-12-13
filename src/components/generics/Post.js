@@ -3,6 +3,7 @@ import { Button } from "primereact/button";
 import { confirmPopup, ConfirmPopup } from "primereact/confirmpopup";
 import { Toast } from "primereact/toast";
 import { useRef } from "react";
+import { useState } from "react";
 
 export default function Post({post, isAdminMode, refreshPosts}) {
 
@@ -13,6 +14,12 @@ export default function Post({post, isAdminMode, refreshPosts}) {
     });
 
     const toast = useRef(null);
+    const [isLiked, setIsLiked] = useState(false);
+
+    const toggleLike = () => {
+        setIsLiked(!isLiked);
+        //ne pas oublier la requete bak
+    };
 
     const acceptDelete = () => {
         axios.delete(
@@ -76,10 +83,17 @@ export default function Post({post, isAdminMode, refreshPosts}) {
                 !isAdminMode && 
                 <div id="action-bar" className="flex justify-content-between select-none pt-2 text-600">
                     <div>
-                        <label className="flex gap-2 hover:text-red-500 align-items-center transition-colors transition-duration-100 cursor-pointer">
+                        {/* <label className="flex gap-2 hover:text-red-500 align-items-center transition-colors transition-duration-100 cursor-pointer">
                             <i className="pi pi-heart text-sm"></i>
                             Likes {post.likes}
+                        </label> */}
+                        <label 
+                            className="flex gap-2 align-items-center cursor-pointer transition-colors transition-duration-100" 
+                            onClick={toggleLike}>
+                            <i className={`pi ${isLiked ? 'pi-heart-fill text-red-500' : 'pi-heart'} text-sm`}></i>
+                            Likes {isLiked ? post.likes + 1 : post.likes}
                         </label>
+                        {/* GARDER LE FONCTIONNEMENT ICI JAI FAIT EN DUR PR MONTRER LE FONCTIONNEMENT A LA PROF MAIS PAS FAIT LE BACK ENCORE */}
                     </div>
                     <div>
                         <label className="flex gap-2 hover:text-primary-500 align-items-center transition-colors transition-duration-100 cursor-pointer">
