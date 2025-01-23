@@ -1,16 +1,25 @@
 import PostsColumn from '@common/PostsColumn';
-import TweetModal from './TweetModal';
+import TweetModal from './Tweetmodal';
 import UserInfos from '@common/UserInfos';
 import '@styles/style.scss';
 import 'primeflex/primeflex.css';
 import 'primeicons/primeicons.css';
 import { Button } from 'primereact/button';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
     const [isAdminMode, setIsAdminMode] = useState(false);
     const [isBanned, setIsBanned] = useState(true);
     const [isModalVisible, setIsModalVisible] = useState(false);
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!localStorage.getItem("accessToken")) {
+            navigate("/login");
+        }
+    }, []);
 
     return (
         <div id="page-home" className="grid flex-grow-1 ">

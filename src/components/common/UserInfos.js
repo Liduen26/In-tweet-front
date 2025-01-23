@@ -3,7 +3,6 @@ import { Button } from "primereact/button";
 import { useEffect, useState } from "react";
 
 export default function UserInfos({isAdminMode, setIsAdminMode, isBanned}) {
-
     const [user, setUser] = useState();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -11,7 +10,8 @@ export default function UserInfos({isAdminMode, setIsAdminMode, isBanned}) {
     
     useEffect(() => {
         axios.get(
-            "http://localhost:8080/user/profile"
+            "http://localhost:8080/user/profile",
+            { headers: { "Authorization": "Bearer " + localStorage.getItem("accessToken") }}
         ).then((response) => {
             setUser(response.data);
             setLoading(false);

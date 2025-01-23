@@ -13,9 +13,8 @@ export default function PostsColumn({isAdminMode}) {
     }, []);
     
     const getPostList = () => {
-        axios.get(
-            "http://localhost:8080/post"
-        ).then((response) => {
+        axios.get("http://localhost:8080/post", { headers: { "Authorization": "Bearer " + localStorage.getItem("accessToken") }})
+        .then((response) => {
             setPosts(response.data);
             setLoading(false);
         }).catch((err) => {
