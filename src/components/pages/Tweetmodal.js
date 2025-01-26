@@ -12,6 +12,11 @@ export default function TweetModal({ visible, onClose }) {
         }
     };
 
+    function sendTweet() {
+
+        onClose();
+    };
+
     if (!visible) return null;
 
     return (
@@ -42,7 +47,7 @@ export default function TweetModal({ visible, onClose }) {
                     <Button 
                         label="Tweeter" 
                         className="p-button-success" 
-                        onClick={onClose}
+                        onClick={sendTweet}
                         disabled={tweetContent.length === 0}
                     />
                 </div>
