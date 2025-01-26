@@ -12,6 +12,7 @@ export default function Home() {
     const [isAdminMode, setIsAdminMode] = useState(false);
     const [isBanned, setIsBanned] = useState(true);
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const [refetch, setRefetch] = useState(true);
 
     const navigate = useNavigate();
 
@@ -27,7 +28,7 @@ export default function Home() {
                 <h1 className='flex justify-content-center'>In'Tweet</h1>
             </div>
             <div id="post-column" className='col-6 border-x-1 border-y-none border-solid border-gray-500 my-2 ' >
-                <PostsColumn isAdminMode={isAdminMode} />
+                <PostsColumn refetch={refetch} setRefetch={setRefetch} isAdminMode={isAdminMode} />
             </div>
             <div className='col-3 flex flex-column justify-content-around align-items-center' style={{height: '75%'}}>
                 <UserInfos isAdminMode={isAdminMode} setIsAdminMode={setIsAdminMode} isBanned={setIsBanned} />
@@ -43,7 +44,7 @@ export default function Home() {
                     )}
                 </span>
             </div>
-            <TweetModal visible={isModalVisible} onClose={() => setIsModalVisible(false)} />
+            <TweetModal visible={isModalVisible} setRefetch={setRefetch} onClose={() => setIsModalVisible(false)} />
         </div>
     );
 }

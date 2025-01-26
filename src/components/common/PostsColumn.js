@@ -2,24 +2,28 @@ import Post from "@generics/Post";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export default function PostsColumn({isAdminMode}) {
+export default function PostsColumn({isAdminMode, refetch, setRefetch}) {
 
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        getPostList();
-    }, []);
+        if (refetch) {
+            getPostList();
+        }
+    }, [refetch]);
     
     const getPostList = () => {
         axios.get("http://localhost:8080/post", { headers: { "Authorization": "Bearer " + localStorage.getItem("accessToken") }})
         .then((response) => {
             setPosts(response.data);
             setLoading(false);
+            setRefetch(false);
         }).catch((err) => {
             setError(err.response.data.message);
             setLoading(false);
+            setRefetch(false);
         });
     }
 

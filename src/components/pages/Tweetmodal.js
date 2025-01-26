@@ -1,8 +1,9 @@
 import { Button } from 'primereact/button';
 import { useState } from 'react';
 import '@styles/style.scss';
+import axios from 'axios';
 
-export default function TweetModal({ visible, onClose }) {
+export default function TweetModal({ visible, onClose, setRefetch }) {
     const [tweetContent, setTweetContent] = useState('');
     const maxCharacters = 160;
 
@@ -12,8 +13,23 @@ export default function TweetModal({ visible, onClose }) {
         }
     };
 
-    function sendTweet() {
+    function closeModal() {
+        setTweetContent("");
+        onClose();
+    }
 
+    function sendTweet() {
+        axios.post(
+            "http://localhost:8080/post",
+            { body: tweetContent },
+            { headers: { "Authorization": "Bearer " + localStorage.getItem("accessToken") }}
+        ).then((response) => {
+            console.log(response.data);
+            setRefetch(true);
+            setTweetContent("");
+        }).catch((err) => {
+            console.error(err.response.data);
+        });
         onClose();
     };
 
@@ -28,7 +44,7 @@ export default function TweetModal({ visible, onClose }) {
                         icon="pi pi-times" 
                         className="p-button-rounded p-button-text p-button-danger"
                         aria-label="Close" 
-                        onClick={onClose} 
+                        onClick={closeModal} 
                     />
                 </div>
                 <div className="modal-body">
