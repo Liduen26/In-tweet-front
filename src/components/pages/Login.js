@@ -70,13 +70,13 @@ export default function Login() {
 
             <div style={{ width: "fit-content" }} className="flex flex-column gap-4">
                 <div className="flex flex-column gap-2">
-                    <InputText value={username} invalid={isUsernameEmpty} placeholder="Nom d'utilisateur" onChange={(e) => setUsername(e.target.value)} />
-                    <Password value={password} invalid={isPasswordEmpty} placeholder="Mot de passe" onChange={(e) => setPassword(e.target.value)} toggleMask/>
+                    <InputText name="username" value={username} invalid={isUsernameEmpty} placeholder="Nom d'utilisateur" onChange={(e) => setUsername(e.target.value)} />
+                    <Password name="password" value={password} invalid={isPasswordEmpty} placeholder="Mot de passe" onChange={(e) => setPassword(e.target.value)} toggleMask/>
                 </div>
 
                 <div className="flex flex-column gap-1">
-                    <Button label={isSignUp ? "S'inscrire" : "Se connecter"} onClick={isSignUp ? signUp : login} />
-                    <Button label={isSignUp ? "Se connecter" : "S'inscrire"} onClick={() => setSignUp(!isSignUp)} link />
+                    <Button id="connect-button" label={isSignUp ? "S'inscrire" : "Se connecter"} onClick={isSignUp ? signUp : login} />
+                    <Button id="connect-switch-button" label={isSignUp ? "Se connecter" : "S'inscrire"} onClick={() => setSignUp(!isSignUp)} link />
                 </div>
             </div>
         </div>
