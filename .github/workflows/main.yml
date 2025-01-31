@@ -35,13 +35,19 @@ jobs:
         with:
           node-version: '20.x'
           
-      - name: Install dependencies
-        run: npm install
-        
-      - name: Run project
-        run: npm run start &
-        env:
-          CI: true
+      - name: Install and build project
+        run: |
+          npm install
+          npm run build
+
+      - name: Setup apache server
+        run: |
+          sudo apt update
+          sudo apt install -y apache2
+          sudo rm -rf /var/www/html/*
+          sudo cp -r ./dist/* /var/www/html
+          sudo systemctl start apache2
+          sudo systemctl status apache2
       
       - name: Use python
         uses: actions/setup-python@v5
