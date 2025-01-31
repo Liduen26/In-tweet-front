@@ -6,6 +6,7 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
+
   sonarqube:
     name: SonarQube
     runs-on: ubuntu-latest
@@ -17,3 +18,36 @@ jobs:
         uses: SonarSource/sonarqube-scan-action@v4
         env:
           SONAR_TOKEN: fa6a9e92a69680c499a3bbafa36472d21e298106
+  tests:
+    name: Selenium tests
+    runs-on: ubuntu-latest
+    services:
+      selenium:
+        image: selenium/standalone-chrome:latest
+        ports:
+          - 4444:4444
+    steps:
+      - name: Get repository files
+        uses: actions/checkout@v4
+        
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          
+      - name: Install dependencies
+        run: npm install
+        
+      - name: Run project
+        run: npm run start &
+      
+      - name: Use python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13' 
+
+      - name: Install selenium python
+        run: pip install selenium
+        
+      - name: Run tests
+        run: python ./test/login_empty_credentials.py && python ./test/login_fail.py && python ./test/login_success.py
