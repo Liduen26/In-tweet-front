@@ -1,9 +1,20 @@
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support.expected_conditions import presence_of_element_located, all_of
 from selenium.webdriver.common.by import By
 
-driver = webdriver.Chrome()
+chrome_options = Options()
+chrome_options.add_argument("--headless")  # Mode headless pour CI/CD
+chrome_options.add_argument("--no-sandbox")  # Évite les problèmes de permissions
+chrome_options.add_argument("--disable-dev-shm-usage")  # Évite les erreurs de mémoire
+chrome_options.add_argument("--disable-gpu")
+chrome_options.add_argument("--remote-debugging-port=9222")
+
+driver = webdriver.Remote(
+    command_executor="http://localhost:4444/wd/hub",
+    options=chrome_options
+)
 
 login = "http://localhost:3000/login"
 firstError = "Le nom d'utilisateur ne doit pas être vide"
