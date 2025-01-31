@@ -6,6 +6,7 @@ import { useRef } from "react";
 import { useState } from "react";
 
 export default function Post({post, isAdminMode, refreshPosts}) {
+    const API_BASE = window.env.API_URL;
 
     const formattedDate = new Date(post.createdAt).toLocaleDateString("fr-FR", {
         year: "numeric",
@@ -22,7 +23,7 @@ export default function Post({post, isAdminMode, refreshPosts}) {
     };
 
     const acceptDelete = () => {
-        axios.delete("http://localhost:8080/post/" + post.id, { headers: { "Authorization": "Bearer " + localStorage.getItem("accessToken") }}).then(() => {
+        axios.delete(API_BASE + "/post/" + post.id, { headers: { "Authorization": "Bearer " + localStorage.getItem("accessToken") }}).then(() => {
             toast.current.show({ severity: 'success', summary: 'Success', detail: 'Post deleted successfully', life: 3000 });
             
             refreshPosts();
@@ -32,7 +33,7 @@ export default function Post({post, isAdminMode, refreshPosts}) {
         
     };
     const acceptBan = () => {
-        axios.post("http://localhost:8080/user/ban/" + post.user.username, {}, { headers: { "Authorization": "Bearer " + localStorage.getItem("accessToken") }}).then(() => {
+        axios.post(API_BASE + "/user/ban/" + post.user.username, {}, { headers: { "Authorization": "Bearer " + localStorage.getItem("accessToken") }}).then(() => {
             toast.current.show({ severity: 'success', summary: 'Success', detail: post.user.username + ' has been thrown out the window !', life: 3000 });
             
             refreshPosts();
