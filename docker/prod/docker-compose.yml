@@ -2,8 +2,6 @@ services:
   react-app:
     image: in-tweet-front
     container_name: front-intweet
-    environment:
-      ENV_API_URL: http://localhost:8081
     ports:
       - "3000:80"
     restart: always
