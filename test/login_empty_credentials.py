@@ -3,9 +3,13 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support.expected_conditions import presence_of_element_located, all_of
 from selenium.webdriver.common.by import By
 
+from dotenv import dotenv_values
+
+API_URL = dotenv_values("../.env").get("API_URL")
+
 driver = webdriver.Chrome()
 
-login = "http://localhost:3000/login"
+login = f'{API_URL}/login'
 firstError = "Le nom d'utilisateur ne doit pas être vide"
 secondError = "Le mot de passe ne doit pas être vide"
 

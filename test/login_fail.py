@@ -3,9 +3,13 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support.expected_conditions import presence_of_element_located
 from selenium.webdriver.common.by import By
 
+from dotenv import dotenv_values
+
+API_URL = dotenv_values("../.env").get("API_URL")
+
 driver = webdriver.Chrome()
 
-login = "http://localhost:3000/login"
+login = f'{API_URL}/login'
 error = "Le nom d'utilisateur ou le mot de passe n'est pas bon"
 
 driver.get(login)
