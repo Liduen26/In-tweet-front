@@ -16,7 +16,7 @@ driver = webdriver.Remote(
     options=chrome_options
 )
 
-login = "http://localhost:3000/login"
+login = "http://localhost/login"
 firstError = "Le nom d'utilisateur ne doit pas être vide"
 secondError = "Le mot de passe ne doit pas être vide"
 
