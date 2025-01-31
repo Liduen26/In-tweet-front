@@ -26,6 +26,12 @@ jobs:
         image: selenium/standalone-chrome:latest
         ports:
           - 4444:4444
+      apache:
+        image: httpd:2.4
+        ports:
+          - 80:80
+        volumes:
+          - ./dist:/usr/local/apache2/htdocs
     steps:
       - name: Get repository files
         uses: actions/checkout@v4
@@ -39,15 +45,6 @@ jobs:
         run: |
           npm install
           npm run build
-
-      - name: Setup apache server
-        run: |
-          sudo apt update
-          sudo apt install -y apache2
-          sudo rm -rf /var/www/html/*
-          sudo cp -r ./dist/* /var/www/html
-          sudo systemctl start apache2
-          sudo systemctl status apache2
       
       - name: Use python
         uses: actions/setup-python@v5
