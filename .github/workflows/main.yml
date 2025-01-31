@@ -6,6 +6,45 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
+
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    services:
+      apache:
+        image: httpd:2.4
+        ports:
+          - 80:80
+        volumes:
+          - ./dist:/usr/local/apache2/htdocs
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4.2.0
+      
+      - name: Install deps and build
+        run: |
+          npm install
+          npm run build
+        
+      - name: Setting up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          
+      - uses: browser-actions/setup-chrome@v1
+        with:
+          install-chromedriver: true
+
+        
+       # Need to fetch reqs if needed
+      - name: Installing all necessary packages
+        run: pip install python-dotenv selenium
+        
+      - run: python ./test/login_empty_credentials.py
+
+        
   sonarqube:
     name: SonarQube
     runs-on: ubuntu-latest
@@ -16,4 +55,5 @@ jobs:
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v4
         env:
+          # TODO A mettre dans les secrets
           SONAR_TOKEN: fa6a9e92a69680c499a3bbafa36472d21e298106

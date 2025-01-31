@@ -3,10 +3,14 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support.expected_conditions import url_changes
 from selenium.webdriver.common.by import By
 
+from dotenv import dotenv_values
+
+API_URL = dotenv_values("../.env").get("API_URL")
+
 driver = webdriver.Chrome()
 
-login = "http://localhost:3000/login"
-home = "http://localhost:3000/"
+login = f'{API_URL}/login'
+home = f'{API_URL}/'
 
 driver.get(login)
 
