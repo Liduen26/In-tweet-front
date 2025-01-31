@@ -2,12 +2,13 @@ from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support.expected_conditions import presence_of_element_located, all_of
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
 
 from dotenv import dotenv_values
 
 API_URL = dotenv_values("../.env").get("API_URL")
 
-driver = webdriver.Chrome()
+driver = webdriver.Firefox()
 
 login = f'{API_URL}/login'
 firstError = "Le nom d'utilisateur ne doit pas être vide"
