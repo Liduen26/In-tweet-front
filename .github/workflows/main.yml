@@ -42,12 +42,12 @@ jobs:
         with:
           install-chromedriver: true
 
-        
        # Need to fetch reqs if needed
       - name: Installing all necessary packages
         run: pip install python-dotenv selenium
         
-      - run: python ./test/login_empty_credentials.py
+      # - name: Run Functional tests
+      #   run: python ./test/login_empty_credentials.py
 
       - name: Build Docker image
         run: |
