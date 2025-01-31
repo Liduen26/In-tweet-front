@@ -18,6 +18,9 @@ jobs:
         volumes:
           - ./dist:/usr/local/apache2/htdocs
 
+    env:
+      API_URL: api
+
     steps:
       - uses: actions/checkout@v4
       - name: Setup Node.js environment
@@ -44,7 +47,23 @@ jobs:
         
       - run: python ./test/login_empty_credentials.py
 
+      - name: Build Docker image
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/in-tweet-front:latest .
+          docker tag ${{ secrets.DOCKER_USERNAME }}/in-tweet-front:latest ${{ secrets.DOCKER_USERNAME }}/in-tweet-front:${{ github.sha }}
+
+      - name: Push Docker image
+        run: |
+          docker push ${{ secrets.DOCKER_USERNAME }}/in-tweet-front:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/in-tweet-front:${{ github.sha }}
         
+      - name: kompose convert
+        run: |
+          cd ./docker/prod
+          curl -L https://github.com/kubernetes/kompose/releases/download/v1.35.0/kompose-linux-amd64 -o kompose
+          chmod +x ./kompose
+          ./kompose convert
+
   sonarqube:
     name: SonarQube
     runs-on: ubuntu-latest

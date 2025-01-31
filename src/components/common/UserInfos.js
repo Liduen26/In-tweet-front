@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 
 export default function UserInfos({isAdminMode, setIsAdminMode, isBanned}) {
-    const API_BASE = window.env.API_URL;
+    const API_BASE = process.env.API_URL;
 
     const [user, setUser] = useState();
     const [loading, setLoading] = useState(true);

@@ -4,7 +4,7 @@ import '@styles/style.scss';
 import axios from 'axios';
 
 export default function TweetModal({ visible, onClose, setRefetch }) {
-    const API_BASE = window.env.API_URL;
+    const API_BASE = process.env.API_URL;
 
     const [tweetContent, setTweetContent] = useState('');
     const maxCharacters = 160;

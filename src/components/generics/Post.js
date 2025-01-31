@@ -6,7 +6,7 @@ import { useRef } from "react";
 import { useState } from "react";
 
 export default function Post({post, isAdminMode, refreshPosts}) {
-    const API_BASE = window.env.API_URL;
+    const API_BASE = process.env.API_URL;
 
     const formattedDate = new Date(post.createdAt).toLocaleDateString("fr-FR", {
         year: "numeric",

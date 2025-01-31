@@ -6,7 +6,7 @@ import { Password } from "primereact/password";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
-    const API_BASE = window.env.API_URL;
+    const API_BASE = process.env.API_URL;
     const [username, setUsername]               = useState("");
     const [isUsernameEmpty, setUsernameEmpty]   = useState(false);
     const [isPasswordEmpty, setPasswordEmpty]   = useState(false);

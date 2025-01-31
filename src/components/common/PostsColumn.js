@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 export default function PostsColumn({isAdminMode, refetch, setRefetch}) {
 
-    const API_BASE = window.env.API_URL;
+    const API_BASE = process.env.API_URL;
 
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
