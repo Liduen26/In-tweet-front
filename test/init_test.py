@@ -6,7 +6,7 @@ def test_firefox():
     options.add_argument("--headless")  # Pour exécuter Firefox sans interface graphique
     driver = webdriver.Firefox(options=options)
 
-    driver.get("http://localhost:3000")
+    driver.get("http://localhost:80")
     assert "Projet react" in driver.title
 
     driver.quit()
