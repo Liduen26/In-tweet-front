@@ -46,6 +46,18 @@ jobs:
       - name: Installing all necessary packages
         run: pip install python-dotenv selenium
 
+      - name: Locate Firefox and Geckodriver
+        run: |
+          echo "Firefox location:"
+          which firefox
+          echo "Firefox version:"
+          firefox --version
+      
+          echo "Geckodriver location:"
+          which geckodriver
+          echo "Geckodriver version:"
+          geckodriver --version
+
       - run: python ./test/init_test.py
 
         
