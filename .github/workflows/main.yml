@@ -33,18 +33,12 @@ jobs:
         with:
           python-version: '3.9'
 
-      # - name: Remove Snap Firefox and install via APT
-      #   run: |
-      #     sudo snap remove firefox || true  # Ignore l'erreur si déjà supprimé
-      #     sudo apt update
-      #     sudo apt install -y firefox firefox-geckodriver
-        
       # Need to fetch reqs if needed
       - name: Installing all necessary packages
         run: pip install python-dotenv selenium
-
-
-      - run: python ./test/init_test.py
+        
+      - name: Run python tests
+        run: python ./test/init_test.py
 
         
   sonarqube:
