@@ -10,13 +10,6 @@ jobs:
   tests:
     name: Tests
     runs-on: ubuntu-latest
-    # services:
-    #   apache:
-    #     image: httpd:2.4
-    #     ports:
-    #       - 80:80
-    #     volumes:
-    #       - ./dist:/usr/local/apache2/htdocs
 
     steps:
       - uses: actions/checkout@v4
@@ -37,9 +30,6 @@ jobs:
         run: |
           docker run -d -p 80:80 -v ${{ github.workspace }}/dist:/usr/local/apache2/htdocs --name apache_server httpd:2.4
           sleep 10  # Attendre un peu que le serveur démarre
-      
-      - name: Check localhost
-        run: curl -v http://localhost:80
         
       - name: Setting up Python
         uses: actions/setup-python@v4
@@ -51,9 +41,10 @@ jobs:
         run: pip install python-dotenv selenium
 
       - name: Run python tests
-        run: python ./test/init_test.py
+        run: |
+          python ./test/login_empty_credentials.py
 
-        
+
   sonarqube:
     name: SonarQube
     runs-on: ubuntu-latest

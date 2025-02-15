@@ -6,7 +6,7 @@ from selenium.webdriver.chrome.options import Options
 
 from dotenv import dotenv_values
 
-API_URL = dotenv_values("../.env").get("API_URL")
+API_URL = "http://localhost:80"
 
 driver = webdriver.Firefox()
 
