@@ -10,13 +10,13 @@ jobs:
   tests:
     name: Tests
     runs-on: ubuntu-latest
-    services:
-      apache:
-        image: httpd:2.4
-        ports:
-          - 80:80
-        volumes:
-          - ./dist:/usr/local/apache2/htdocs
+    # services:
+    #   apache:
+    #     image: httpd:2.4
+    #     ports:
+    #       - 80:80
+    #     volumes:
+    #       - ./dist:/usr/local/apache2/htdocs
 
     steps:
       - uses: actions/checkout@v4
@@ -33,6 +33,11 @@ jobs:
           cd dist
           ls -al
       
+      - name: Start Apache container manually
+        run: |
+          docker run -d -p 80:80 -v ${{ github.workspace }}/dist:/usr/local/apache2/htdocs --name apache_server httpd:2.4
+          sleep 10  # Attendre un peu que le serveur démarre
+      
       - name: Check localhost
         run: curl -v http://localhost:80
         
@@ -45,8 +50,6 @@ jobs:
       - name: Installing all necessary packages
         run: pip install python-dotenv selenium
 
-
-        
       - name: Run python tests
         run: python ./test/init_test.py
 
