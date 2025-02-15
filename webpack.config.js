@@ -63,7 +63,7 @@ module.exports = {
         historyApiFallback: true,
         port: 3000
     },
-    devtool: "eval-source-map",
+    devtool: false,
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'main.[contenthash].js',

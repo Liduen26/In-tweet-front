@@ -42,6 +42,7 @@ jobs:
 
       - name: Run python tests
         run: |
+          python ./test/init_test.py
           python ./test/login_empty_credentials.py
 
 

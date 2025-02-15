@@ -7,8 +7,7 @@ def test_firefox():
     driver = webdriver.Firefox(options=options)
 
     driver.get("http://localhost:80")
-    # assert "Projet react" in driver.title
-    print(driver.title)
+    assert "Projet react" in driver.title
 
     driver.quit()
 
