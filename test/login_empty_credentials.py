@@ -4,11 +4,11 @@ from selenium.webdriver.support.expected_conditions import presence_of_element_l
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 
-from dotenv import dotenv_values
-
 API_URL = "http://localhost:80"
 
-driver = webdriver.Firefox()
+options = Options()
+options.add_argument("--headless")  # Pour exécuter Firefox sans interface graphique
+driver = webdriver.Firefox(options=options)
 
 login = f'{API_URL}/login'
 firstError = "Le nom d'utilisateur ne doit pas être vide"
