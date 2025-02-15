@@ -10,14 +10,13 @@ options = Options()
 options.add_argument("--headless")  # Pour exécuter Firefox sans interface graphique
 driver = webdriver.Firefox(options=options)
 
-login = f'{API_URL}/login'
 firstError = "Le nom d'utilisateur ne doit pas être vide"
 secondError = "Le mot de passe ne doit pas être vide"
 
 firstErrorPath = "//*[@id='root']/div/div[2]/div[1]"
 secondErrorPath = "//*[@id='root']/div/div[2]/div[2]"
 
-driver.get(login)
+driver.get(API_URL)
 
 connectButton = driver.find_element(By.ID, "connect-button")
 
