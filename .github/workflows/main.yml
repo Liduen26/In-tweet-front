@@ -42,8 +42,8 @@ jobs:
 
       - name: Run python tests
         run: |
-          python ./test/init_test.py
-          python ./test/login_empty_credentials.py
+          python ./tests/init_test.py
+          python ./tests/login_empty_credentials.py
 
 
   sonarqube:
