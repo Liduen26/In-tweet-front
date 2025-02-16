@@ -42,6 +42,22 @@ Le projet utilise un pipeline CI/CD pour automatiser les phases de build, test e
 ## Gestion des tickets
 La gestion des tickets a été effectuée à l'aide de Trello, permettant le suivi des tâches et la répartition du travail entre les contributeurs.
 
+# CICD
+
+## Pipeline de ce projet
+
+Le pipeline s'exécute sur un worker ubuntu
+
+Il est composé de plusieurs étapes : 
+- Setup et build du projet react
+- Setup d'un serveur apache pour simuler une API
+- Setup de python pour les tests e2e
+- Lancement des tests e2e
+- Upload de l'image sur Docker Hub
+- Convert en fichiers kube via kompose
+
+Un autre pipeline pour l'analyse Sonar, où il va contacter SonarQube pour lancer le scan. 
+
 ## Start project
 
 ```
