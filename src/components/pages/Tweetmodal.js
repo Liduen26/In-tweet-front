@@ -4,6 +4,8 @@ import '@styles/style.scss';
 import axios from 'axios';
 
 export default function TweetModal({ visible, onClose, setRefetch }) {
+    const API_BASE = process.env.API_URL;
+
     const [tweetContent, setTweetContent] = useState('');
     const maxCharacters = 160;
 
@@ -20,7 +22,7 @@ export default function TweetModal({ visible, onClose, setRefetch }) {
 
     function sendTweet() {
         axios.post(
-            "http://localhost:8080/post",
+            API_BASE + "/post",
             { body: tweetContent },
             { headers: { "Authorization": "Bearer " + localStorage.getItem("accessToken") }}
         ).then((response) => {

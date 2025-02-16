@@ -6,6 +6,7 @@ import { Password } from "primereact/password";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+    const API_BASE = process.env.API_URL;
     const [username, setUsername]               = useState("");
     const [isUsernameEmpty, setUsernameEmpty]   = useState(false);
     const [isPasswordEmpty, setPasswordEmpty]   = useState(false);
@@ -17,7 +18,7 @@ export default function Login() {
 
     function login() {
         if (!invalidCredentials()) {
-            axios.post("http://localhost:8080/auth/login", { username, password })
+            axios.post(API_BASE + "/auth/login", { username, password })
             .then((response) => {
                 localStorage.setItem("accessToken", response.data);
                 navigate("/");
@@ -30,7 +31,7 @@ export default function Login() {
 
     function signUp() {
         if (!invalidCredentials()) {
-            axios.post("http://localhost:8080/auth/signUp", { username, password })
+            axios.post(API_BASE + "/auth/signUp", { username, password })
             .then((response) => {
                 localStorage.setItem("accessToken", response.data);
                 navigate("/");

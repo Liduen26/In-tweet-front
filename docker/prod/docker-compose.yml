@@ -1,0 +1,7 @@
+services:
+  react-app:
+    image: in-tweet-front
+    container_name: front-intweet
+    ports:
+      - "3000:80"
+    restart: always

@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 
 export default function PostsColumn({isAdminMode, refetch, setRefetch}) {
 
+    const API_BASE = process.env.API_URL;
+
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -15,7 +17,7 @@ export default function PostsColumn({isAdminMode, refetch, setRefetch}) {
     }, [refetch]);
     
     const getPostList = () => {
-        axios.get("http://localhost:8080/post", { headers: { "Authorization": "Bearer " + localStorage.getItem("accessToken") }})
+        axios.get(API_BASE + "/post", { headers: { "Authorization": "Bearer " + localStorage.getItem("accessToken") }})
         .then((response) => {
             setPosts(response.data);
             setLoading(false);

@@ -3,7 +3,10 @@ import { Button } from "primereact/button";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+
 export default function UserInfos({isAdminMode, setIsAdminMode, isBanned}) {
+    const API_BASE = process.env.API_URL;
+
     const [user, setUser] = useState();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -12,7 +15,7 @@ export default function UserInfos({isAdminMode, setIsAdminMode, isBanned}) {
 
     useEffect(() => {
         axios.get(
-            "http://localhost:8080/user/profile",
+            API_BASE + "/user/profile",
             { headers: { "Authorization": "Bearer " + localStorage.getItem("accessToken") }}
         ).then((response) => {
             setUser(response.data);
